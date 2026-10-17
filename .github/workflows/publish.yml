@@ -1,0 +1,49 @@
+name: Publish catalog
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Re-sign daily so the published index never goes stale.
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Ratne/AmableData
+          path: .amable
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - run: npm run validate
+      - name: Build and sign the index
+        env:
+          CATALOG_SIGNING_KEY: ${{ secrets.CATALOG_SIGNING_KEY }}
+          CATALOG_KEY_ID: '2026-10'
+        run: npm run build-index
+      - name: Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test -f dist/index.signed.json
+          tag="catalog-$(date -u +%Y%m%d%H%M%S)"
+          gh release create "$tag" dist/index.signed.json dist/index.json \
+            --title "Catalog $(date -u +%Y-%m-%d)" \
+            --notes "Signed app catalog built from ${GITHUB_SHA}." \
+            --latest
+          # Keep the 20 most recent catalog releases.
+          gh release list --limit 200 --json tagName --jq '.[].tagName' | grep '^catalog-' | tail -n +21 | \
+            xargs -r -n1 gh release delete --cleanup-tag --yes

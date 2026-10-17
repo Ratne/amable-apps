@@ -1,0 +1,17 @@
+{
+  "name": "amable-apps",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "validate": "tsx scripts/validate.ts",
+    "check-changes": "tsx scripts/check-changes.ts",
+    "probe": "tsx scripts/probe.ts",
+    "build-index": "tsx scripts/build-index.ts",
+    "conformance": "tsx scripts/conformance.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.6",
+    "zod": "^4.6.7"
+  }
+}

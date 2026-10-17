@@ -1,0 +1,47 @@
+name: Validate apps
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check out the AmableData schema
+        uses: actions/checkout@v4
+        with:
+          repository: Ratne/AmableData
+          path: .amable
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - name: Schema and catalog rules
+        run: npm run validate
+      - name: Identity changes
+        env:
+          BASE_REF: origin/${{ github.base_ref }}
+          PR_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+        run: npm run check-changes
+      - name: Changed apps
+        id: changed
+        run: |
+          ids=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- apps | cut -d/ -f2 | sort -u | tr '\n' ' ')
+          echo "ids=$ids" >> "$GITHUB_OUTPUT"
+      - name: Live checks (base_url, JWKS)
+        if: steps.changed.outputs.ids != ''
+        run: npm run probe -- ${{ steps.changed.outputs.ids }}
+      - name: Conformance (signature enforcement, hook latency)
+        if: steps.changed.outputs.ids != ''
+        run: |
+          for id in ${{ steps.changed.outputs.ids }}; do
+            [ -f "apps/$id/manifest.json" ] || continue
+            npm run conformance -- --manifest "apps/$id/manifest.json"
+          done
