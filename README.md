@@ -17,8 +17,8 @@ workspace approved, and shows its screens in sandboxed iframes.
 3. Open a pull request that adds `apps/<your-app-id>/manifest.json`. The folder name is the app id
    and can never change.
 4. CI validates the manifest, checks that `base_url` and the JWKS are live and that every
-   endpoint rejects unsigned requests. A maintainer reviews the scopes, the privacy policy
-   and the app itself, then merges.
+   endpoint rejects unsigned requests. A maintainer reviews the scopes, the privacy policy,
+   the app itself and its tests, then merges.
 5. Within six hours every installation sees the app in its Marketplace.
 
 Updates follow the same path. Changing `base_url` or `jwks_url` of a published app needs an
@@ -28,6 +28,9 @@ scopes stay installed with the old ones until each workspace approves the new on
 ## Rules
 
 - `https` everywhere, no development URLs.
+- The source is public and ships offline tests against recorded answers of the provider's API,
+  so the app can be maintained when the provider changes
+  ([Tests and fixtures](https://github.com/Ratne/AmableData/blob/main/docs/apps/README.md#tests-and-fixtures-required)).
 - Ask only for the scopes the app uses. Apps that read personal data must handle the
   `privacy.erasure_requested` and `privacy.data_requested` webhooks.
 - Billing is the developer's business: declare it in `pricing`, link it with `billing_url`.
