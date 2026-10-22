@@ -20,6 +20,9 @@ export async function loadSchema(): Promise<AppsModule> {
 
 export const APPS_DIR = resolve('apps');
 
+/** Bundles of the apps deployed into each workspace's Cloudflare account: AmableData releases only. */
+export const OFFICIAL_BUNDLE_PREFIX = 'https://github.com/Ratne/AmableData/releases/download/';
+
 /** Per-app catalog flags, maintained by the catalog owner (never by the app developer). */
 export interface CatalogFlags {
   revoked?: boolean;

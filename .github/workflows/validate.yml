@@ -35,7 +35,7 @@ jobs:
         run: |
           ids=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- apps | cut -d/ -f2 | sort -u | tr '\n' ' ')
           echo "ids=$ids" >> "$GITHUB_OUTPUT"
-      - name: Live checks (base_url, JWKS)
+      - name: Live checks (base_url and JWKS, or the release bundle of deployed apps)
         if: steps.changed.outputs.ids != ''
         run: npm run probe -- ${{ steps.changed.outputs.ids }}
       - name: Conformance (signature enforcement, hook latency)
@@ -43,5 +43,7 @@ jobs:
         run: |
           for id in ${{ steps.changed.outputs.ids }}; do
             [ -f "apps/$id/manifest.json" ] || continue
+            # Deployed into each workspace's Cloudflare: no live copy to test; their suites run in AmableData CI.
+            grep -q '"base_url": "https://deployed-app.invalid"' "apps/$id/manifest.json" && continue
             npm run conformance -- --manifest "apps/$id/manifest.json"
           done

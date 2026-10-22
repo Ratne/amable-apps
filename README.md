@@ -4,9 +4,23 @@ The public catalog of apps that extend [AmableData](https://github.com/Ratne/Ama
 Every installation, managed or self-hosted, downloads the signed index published by this
 repository and shows the apps in its Marketplace.
 
-Apps are hosted by their developers. AmableData never runs third-party code: it calls the
-app's endpoints with signed requests, hands it an OAuth token limited to the scopes the
-workspace approved, and shows its screens in sandboxed iframes.
+Apps of other developers are hosted by their developers. AmableData never runs third-party
+code: it calls the app's endpoints with signed requests, hands it an OAuth token limited to the
+scopes the workspace approved, and shows its screens in sandboxed iframes.
+
+## Official apps
+
+The official apps (Emailable, Kapso, Mapbox, Timely) are not hosted anywhere, and never on
+AmableData's Cloudflare account. Their manifest has `base_url` `https://deployed-app.invalid` and
+a `deployment` block: on install, each CRM downloads the bundle (a release asset of the AmableData
+repository), checks it against `bundle_sha256` and deploys it into the installation's **own**
+Cloudflare account, one Worker and one D1 database per app. On AmableData Cloud the token saved in
+the portal is used; self-hosted owners connect a token the first time. Their icons are committed
+next to the manifest (`apps/<id>/icon.png`).
+
+These manifests are written by `node scripts/release-app.mjs <id> --publish` in the AmableData
+repository, never by hand. CI checks that the bundle downloads and matches the hash instead of
+probing a live URL; the apps' own test suites run in the AmableData CI.
 
 ## Publish an app
 
