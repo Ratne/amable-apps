@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "mapbox",
   "name": "Mapbox",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "tagline": {
     "en": "Address autocomplete with your Mapbox account",
     "it": "Completamento indirizzi con il tuo account Mapbox"
@@ -45,7 +45,7 @@
   "extensions": {
     "address_lookup": {
       "endpoint": "/address/suggest",
-      "attribution": "© Mapbox © OpenStreetMap"
+      "attribution": "Powered by Mapbox · © Mapbox © OpenStreetMap"
     },
     "ui": [
       {
@@ -68,7 +68,7 @@
         "binding": "DB"
       }
     ],
-    "bundle_url": "https://github.com/Ratne/AmableData/releases/download/app-mapbox-v1.0.0/worker.mjs",
-    "bundle_sha256": "9f90e66e473b9241029559a07c6da0261660fa436b1e506889a66812cba434b3"
+    "bundle_url": "https://github.com/Ratne/AmableData/releases/download/app-mapbox-v1.0.1/worker.mjs",
+    "bundle_sha256": "9e0f1bfacd3055530c5747e1bd6ff3e360eb8eb28ffab2214497383ad7315444"
   }
 }
