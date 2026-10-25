@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "emailable",
   "name": "Emailable",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "tagline": {
     "en": "Verify the email of every new contact",
     "it": "Verifica l'email di ogni nuovo contatto"
@@ -113,7 +113,7 @@
         "binding": "DB"
       }
     ],
-    "bundle_url": "https://github.com/Ratne/AmableData/releases/download/app-emailable-v1.0.0/worker.mjs",
-    "bundle_sha256": "53e30189064d0ba65917eb55fd4960354f09d0f6f878fff7dd17668bfdda77e1"
+    "bundle_url": "https://github.com/Ratne/AmableData/releases/download/app-emailable-v1.0.1/worker.mjs",
+    "bundle_sha256": "31e3475a0937b50579e587120d967044f0c2a9d86b71f128f0f0a19b2c488a5e"
   }
 }
