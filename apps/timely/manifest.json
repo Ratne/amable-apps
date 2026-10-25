@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "timely",
   "name": "Timely",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "tagline": {
     "en": "Real countdown timers for emails and pages",
     "it": "Countdown reali per email e pagine"
@@ -142,7 +142,7 @@
       }
     ],
     "cron": ["* * * * *"],
-    "bundle_url": "https://github.com/Ratne/AmableData/releases/download/app-timely-v1.0.0/worker.mjs",
-    "bundle_sha256": "424d46e9c4039e97bd52dd8f5dc8183f0f428f5f1dcf2075f0d64cf62534bb04"
+    "bundle_url": "https://github.com/Ratne/AmableData/releases/download/app-timely-v1.0.1/worker.mjs",
+    "bundle_sha256": "0079acb5d0f449b89cc13203a7aa89a7833844d8f7da4041ffb6b51eff1f1acd"
   }
 }
