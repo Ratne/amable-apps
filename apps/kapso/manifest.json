@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "kapso",
   "name": "Kapso WhatsApp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "tagline": {
     "en": "WhatsApp in the shared inbox, templates and automations",
     "it": "WhatsApp nella inbox condivisa, template e automazioni"
@@ -170,7 +170,7 @@
         "binding": "DB"
       }
     ],
-    "bundle_url": "https://github.com/Ratne/AmableData/releases/download/app-kapso-v1.0.0/worker.mjs",
-    "bundle_sha256": "ecaa2325dbe79193df43689c8b09f74964888e2f4c0fad323b562e76771b8d1f"
+    "bundle_url": "https://github.com/Ratne/AmableData/releases/download/app-kapso-v1.0.1/worker.mjs",
+    "bundle_sha256": "f586257a1c8211760f71c69a67979ed5ca1f01d47d3ec5d75d3aad65ddffbaca"
   }
 }
