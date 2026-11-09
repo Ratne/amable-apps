@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "quizly",
   "name": "Quizly",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "tagline": {
     "en": "Quiz funnels with scores, tags and branching",
     "it": "Quiz funnel con punteggi, tag e percorsi"
@@ -102,7 +102,7 @@
       }
     ],
     "cron": ["*/10 * * * *"],
-    "bundle_url": "https://github.com/Ratne/AmableData/releases/download/app-quizly-v1.0.1/worker.mjs",
-    "bundle_sha256": "fe748b372f9b18615a2906f338261a5d9d443775ef4e929909c072659372d6f2"
+    "bundle_url": "https://github.com/Ratne/AmableData/releases/download/app-quizly-v1.0.2/worker.mjs",
+    "bundle_sha256": "bb23c951af9cf5c4f3c61635616dee913f1f4b9128b34d7d0d449b42c23f2159"
   }
 }
